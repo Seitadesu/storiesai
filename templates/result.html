@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+
+  <meta property="og:title" content="StoriesAI" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="StoriesAI-あなただけの物語をAIで創作-" />
+  <meta property="og:url" content="https://www.storiesai.com/" />
+  <meta property="og:site_name" content="StoriesAI" />
+  <meta property="og:image" content="https://www.storiesai.com/static/space_yuenchi.png" />
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon-->
+    <link rel="icon" type="image/png" href="./static/logo_small_sukashi.png">
+      <!-- Bootstrap icons-->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+      <!-- Google fonts-->
+      <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+      <!-- Core theme CSS (includes Bootstrap)-->
+
+      <link href="/static/css/styles.css" rel="stylesheet" />
+       <title>StoriesAI-あなただけの物語をAIで創作-</title>
+</head>
+<body>
+      <!-- Navigation-->
+      <nav class="navbar navbar-light bg-light static-top">
+          <div class="container text-center">
+              <a class="navbar-brand" href="/"><img src="./static/logo_small_sukashi2.png" class="logo_image" width="50%" height="50%"></a>
+          </div>
+      </nav>
+           <!-- Masthead-->
+        <header class="masthead masthead-back">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <h3 class="mb-5">タイトル</h3>
+                            <h3 class="mb-5">「{{text}}」</h3>
+                            <h4 class="mb-5">ストーリー</h4></div>
+                            <div class="text-white">
+                            <p class="mb-5"　id="code">{{ stories_text }}</p></div>
+                            <div class="text-center text-white">
+
+                            
+                            <button type="button" class="btn btn-info text-white" id="share-button" onclick="shareOnTwitter()" style="margin-bottom: 10px; margin-top: 10px;">シェア！<i class="bi bi-twitter"></i></button>
+                                     <!-- Masthead-->
+           <form class="form-subscribe" id="updateForm" action="/result" method="post" enctype="multipart/form-data">   
+            <input type="hidden" name="title" value="{{text}}" /> 
+            <input type="hidden" name="select_font" value="{{select_font}}">
+            <input type="hidden" name="select_color" value="{{select_color}}">
+            <input type="hidden" name="length_text" value="{{length_text}}">
+            <input type="hidden" name="length_plot" value="{{length_plot}}">
+            <input type="hidden" name="category" value="{{category}}">
+            <input type="hidden" name="hero" value="{{hero}}">
+            <input type="hidden" name="cast1" value="{{cast1}}">
+            <input type="hidden" name="cast2" value="{{cast2}}">
+            <input type="hidden" name="cast3" value="{{cast3}}">
+            <input type="hidden" name="story_term" value="{{story_term}}">
+            <input type="hidden" name="keywords1" value="{{keywords1}}">
+            <input type="hidden" name="keywords2" value="{{keywords2}}">
+            <input type="hidden" name="keywords3" value="{{keywords3}}">
+            <input type="hidden" name="language" value="{{language}}">
+            <input class="btn btn-success" id="submitButton2" type="submit" value="別のストーリーへ更新" style="margin-top: 10px;">
+</form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <body>
+
+          <section class="bg-light">
+      
+        
+            <div class="gallery-container mt-3">
+              <p>呪文:{{ prompt }}</p>
+              <h3 class="mb-5">タイトル</h3>
+              <h3 class="mb-5">「{{text}}」</h3>
+              <img class="gallery-main-image shadow" id="galleryMainImage" src="static/image/generate/weak_center{{id}}.png" alt="...">
+              <div class="gallery-thumbnail-container">
+                <img class="gallery-thumbnail-image shadow" src="static/image/generate/weak_center{{id}}.png" alt="..." onclick="updateMainImage(this.src)">                                                          
+                <img class="gallery-thumbnail-image shadow" src="static/image/generate/aititle{{id}}.png" alt="..." onclick="updateMainImage(this.src)">
+                <img class="gallery-thumbnail-image shadow" src="static/image/generate/weak{{id}}.png" alt="..." onclick="updateMainImage(this.src)">
+              </div>
+              <p>写真・文章は商用利用可能です。</p>
+              <button type="button" class="btn btn-info text-white" id="share-button" onclick="shareOnTwitter()" style="margin-bottom: 10px; margin-top: 10px;">シェア！<i class="bi bi-twitter"></i></button>
+              
+                                     
+        
+        
+           
+        <style>
+        .gallery-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        }
+        
+        .gallery-main-image {
+        width: 80%;
+        height: auto;
+        max-width: 512px;
+        max-height: 512px;
+        margin: 5px;
+        }
+        
+        .gallery-thumbnail-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+        max-width: 800px;
+        }
+        
+        .gallery-thumbnail-image {
+        width: 12%;
+        height: auto;
+        max-width: 120px;
+        max-height: 120px;
+        margin: 4px;
+        }
+        
+        .gallery-thumbnail-image:hover {
+        cursor: pointer;
+        }
+        
+        </style>
+        
+        <script>
+        function updateMainImage(src) {
+        document.getElementById('galleryMainImage').src = src;
+        }
+        
+        </script>
+        </section>
+
+        <section class="masthead2 masthead-back">
+          <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="text-center text-white">
+                        <h1 class="mb-2">StoriesAI</h1>
+                        <p>-あなただけの物語をAIで創作-</p>
+
+                        <p class="mb-5">StoriesAIでは<br>タイトルを入力するだけで、AIが<br>あなただけの物語とイラストを作成</p>
+
+                        <form class="form-subscribe" id="contactForm"  action="/result" method="post" enctype="multipart/form-data">
+                          <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+                            <a style="cursor:pointer;"><button type="button" class="btn btn-secondary my-2"><i class="bi bi-filter"></i>高度な条件</button></a>
+                          </div>
+                          
+                        
+
+                          <div id="open" style="display:none;clear:both;">             
+
+                            <label for="select_length_text" class="my-2">文字数：</label>
+                            <select id="select_length_text" name="length_text" class="form-control form-control-sm">  
+                              <option value="100">100文字</option>
+                              <option value="150">150文字</option>
+                              <option value="200">200文字</option>
+                              <option value="200">200文字</option>
+                              <option value="250">250文字</option>
+                              <option value="300">300文字</option>
+                              <option value="350">350文字</option>
+                              <option selected value="400">400文字</option>
+                            </select>
+
+                            <label for="select_length_plot" class="my-2">プロット数：</label>
+                            <select id="select_length_plot" name="length_plot" class="form-control form-control-sm">  
+                              <option value="1">1プロット</option>
+                              <option value="2">2プロット</option>
+                              <option value="3">3プロット</option>
+                              <option selected value="4">4プロット</option>
+                            </select>                                
+                            
+                            <label for="select_category" class="my-2">ジャンル：</label>
+                            <select id="select_category" name="category" class="form-control form-control-sm">
+                                <option value="">--選択してください--</option>
+                                <option value="恋愛">恋愛</option>
+                                <option value="ギャグ">ギャグ</option>
+                                <option value="4コマ">4コマ</option>
+                                <option value="アニメ">アニメ</option>
+                                <option value="アイドル">アイドル</option>
+                                <option value="戦争">戦争</option>
+                                <option value="バンド">バンド</option>
+                                <option value="SF">SF</option>
+                                <option value="ファンタジー">ファンタジー</option>
+                                <option value="ホラー">ホラー</option>
+                                <option value="サスペンス">サスペンス</option>
+                                <option value="アクション">アクション</option>
+                                <option value="ミステリー">ミステリー</option>
+                                <option value="コメディ">コメディ</option>
+                                <option value="ドラマ">ドラマ</option>
+                            </select>
+
+                          <label for="select_hero" class="my-2">主人公：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_cast1" type="text" placeholder="人物名を入力" name="hero" 
+                          value="" />                                    
+                          
+
+                          <label for="select_cast1" class="my-2">登場人物1：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_cast1" type="text" placeholder="人物名を入力" name="cast1" 
+                          value="" />     
+                                                 
+                          <label for="select_cast2" class="my-2">登場人物2：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_cast2" type="text" placeholder="人物名を入力" name="cast2" 
+                          value="" />
+                          
+                          <label for="select_cast3" class="my-2">登場人物3：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_cast3" type="text" placeholder="人物名を入力" name="cast3" 
+                          value="" />
+                          
+                          <label for="select_story_term" class="my-2">条件：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_story_term" type="text" placeholder="条件を入力" name="story_term" 
+                            value="" />
+                    
+                          
+                          <label for="select_story_term" class="my-2">キーワード1：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_story_term" type="text" placeholder="キーワードを入力" name="keywords1" 
+                          value="" />
+
+                          <label for="select_kewwords2" class="my-2">キーワード2：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_keywords2" type="text" placeholder="キーワードを入力" name="keywords2" 
+                          value="" />  
+
+                          <label for="select_kewwords3" class="my-2">キーワード3：</label>
+                          <input maxlength="15" minlength="1" class="form-control form-control-sm" id="select_keywords3" type="text" placeholder="キーワードを入力" name="keywords3" 
+                          value="" />
+
+                          <label for="select_language" class="my-2">言語：</label>
+                          <select id="select_language" name="language" class="form-control form-control-sm">
+                              <option value="日本語">日本語</option>
+                              <option value="英語">英語</option>
+                              <option value="中国語">中国語</option>
+                              <option value="韓国語">韓国語</option>
+                              <option value="スペイン語">スペイン語</option>
+                          </select>
+
+                          <label for="select_color" class="my-2">文字の色：</label>                  
+                          <select id="select_color" name="select_color" class="form-control form-control-sm">
+                              <option selected value="(255, 255, 255)"style="color:#FFFFFF;" >白</option> 
+                              <option value="(0, 0, 0)">黒</option>
+                              <option value="(255, 0, 0)"style="color:#FF0000;" >赤</option>
+                              <option value="(255, 255, 0)"style="color:#FFFF00;" >黄</option>
+                              <option value="(255, 100, 255)"style="color:#FF64FF;" >ピンク</option>
+                              <option value="(128, 0, 128)"style="color:#800080;" >紫</option>
+                              <option value="(0, 128, 0)"style="color:#008000;" >緑</option>
+                              <option value="(0, 0, 255)" style="color:#0000FF;" >青</option>
+                            </select>
+        
+                            <label for="select_font" class="my-2">文字のフォント：</label>                      
+                            <select id="select_font" name="select_font" class="form-control form-control-sm">
+                              <option selected value="a" style="font-family: sans-serif;" >ゴシック体</option>   
+                              <option value="b" style="font-family: serif;">明朝体</option>       
+                              <option value="c"  style="font-family: HG丸ｺﾞｼｯｸ体;">丸ゴシック体</option>
+                            </select>
+                      </div>     
+                          <div class="col">
+                              <label for="title" class="my-2">タイトル：</label>
+                              <input maxlength="15" minlength="1" class="form-control form-control-lg" id="title" type="text" placeholder="タイトルを入力(必須)" name="title" required value="" />
+                          </div>
+
+                      <div class="row justify-content-center"><div class="col-auto"><input class="btn btn-primary" id="submitButton" type="submit" value="generate song" style="margin-top: 10px;"></div>
+                      <div class="loader" style="margin-top: 10px;"></div></div>
+                      <p class="loader2 lead " style="margin-top: 5px;">約40秒で完成します。しばらくお待ちください。</p>
+                      <button type="button" class="btn btn-info text-white" id="share-button" onclick="shareOnTwitter()" style="margin-bottom: 10px; margin-top: 20px;">シェア！<i class="bi bi-twitter"></i></button>    
+                          
+<style>                              
+                      .loader {
+border: 6px solid #f3f3f3;
+border-top: 6px solid #3498db;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+animation: spin 1s linear infinite;
+display: none; /* 初期状態では非表示 */
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+/* ボタンがクリックされた時に.loaderを表示 */
+#submitButton:active + .loader {
+display: inline-block;
+}
+
+</style>
+<script>
+const submitButton = document.getElementById("submitButton");
+submitButton.addEventListener("click", function() {
+const loader = document.querySelector(".loader");
+loader.style.display = "inline-block"; // show loader
+
+setTimeout(function() {
+  loader2.style.display = "block"; // show loader2 after 1 second
+  setTimeout(typing, 1000); // start typing after 1 second
+}, 1000);
+});
+</script>
+
+<style>
+@media screen and (max-width: 480px) {
+.loader2 {
+display: block;
+}
+}
+
+</style>
+
+
+                                  
+              </div>
+          </div>
+      </form>
+      
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+        
+        <!-- Footer-->
+        <footer class="footer bg-light style=">
+          <div class="container" style="margin-bottom: 50px;">
+              <div class="row">
+                  <div class="col-lg-6 h-100 text-center text-lg-start my-auto" >
+                      <p class="text-muted small mb-4 mb-lg-0" >&copy; 2023- Seita    All Rights Reserved.<br> produced by Seita Nagai</p>
+                      <p class="text-muted small mb-4 mb-lg-0" id="scroll-target2" >お問い合わせはメール(nagasei4649@gmail.com)もしくは、twitter<a href="https://twitter.com/naasee613" target="_blank">Seita Nagai</a>のDMまでお願いします。</p>
+                      <p class="text-muted small mb-4 mb-lg-0" ><a href="https://www.storiesai.com" target="_blank">StoriesAI</a></p>
+                      <p class="text-muted small mb-4 mb-lg-0" ><a href="https://www.aisakkyoku.com" target="_blank">AIサッキョク</a></p>
+                      <p class="text-muted small mb-4 mb-lg-0" ><a href="https://www.aititle.net" target="_blank">AIタイトル</a></p>
+                      <p class="text-muted small mb-4 mb-lg-0" ><a href="https://www.honyakuyouyaku.com" target="_blank">AIほんやくヨウヤク</a></p>
+                      <p class="text-muted small mb-4 mb-lg-0" ><a href="https://www.titleart.net" target="_blank">タイトルアート</a></p>
+                      <p class="text-muted small mb-4 mb-lg-0" ><a href="https://www.mierukaq.com" target="_blank">見える化アンケート</a></p>
+                  </div>
+              </div>
+          </div>
+        </footer>
+  
+
+<style>
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("static/image/generate/weak{{id}}.png") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+</style>
+
+<style>
+  .masthead2 {
+    position: relative;
+    background-color: #343a40;
+    background: url("static/natural.png") no-repeat center center;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+  </style>
+
+<script>
+  function shareOnTwitter() {
+  var tweetText = '曲名：「{{text}}」でAIがストーリーを創作しました！';
+  var shareURL = 'https://www.storiesai.com';
+  var shareLink = 'https://twitter.com/intent/tweet?text=' + tweetText + '&url=' + shareURL;
+  window.open(shareLink);
+            }
+</script> 
+
+     
+    
+
+</html>
